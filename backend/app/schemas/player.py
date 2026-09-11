@@ -3,12 +3,6 @@ from pydantic import BaseModel
 POSITION_MAP = {1: "GK", 2: "DEF", 3: "MID", 4: "FWD"}
 
 
-class Team(BaseModel):
-    id: int
-    name: str
-    short_name: str
-
-
 class Player(BaseModel):
     id: int
     web_name: str
@@ -29,7 +23,3 @@ def player_from_raw(player: dict) -> Player:
         total_points=player["total_points"],
         form=float(player["form"] or 0.0),
     )
-
-
-def team_from_raw(team: dict) -> Team:
-    return Team(id=team["id"], name=team["name"], short_name=team["short_name"])

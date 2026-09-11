@@ -1,21 +1,27 @@
 import requests
 import time
 
-BOOTSTRAP_URL = "https://fantasy.premierleague.com/api/bootstrap-static/"
-CACHE_TTL_SECONDS = 300 # 5 minutes
+from ..config import BOOTSTRAP_URL, FIXTURES_URL, CACHE_TTL_SECONDS
 
 _cache: dict = {"data": None, "fetched_at": 0.0}
 
-def get_bootstrap_data():
-    """Fetch bootstrap data from the FPL API and store in a short-lived cache."""
+def _get_cached(key: str, url: str) -> dict | list:
     now = time.time()
-    if _cache["data"] is not None and (now - _cache["fetched_at"]) < CACHE_TTL_SECONDS:
-        return _cache["data"]
-
-    response = requests.get(BOOTSTRAP_URL, timeout=15)
+    entry = _cache.get(key)
+    if entry is not None and (now - entry["fetched_at"]) < CACHE_TTL_SECONDS:
+        return entry["data"]
+    
+    response = requests.get(url, timeout=15)
     response.raise_for_status()
     data = response.json()
     
-    _cache["data"] = data
-    _cache["fetched_at"] = now
-    return _cache["data"]
+    _cache[key] = {"data": data, "fetched_at": now}
+    return data
+
+def get_bootstrap_data() -> dict:
+    """Fetch bootstrap data from the FPL API, cached."""
+    return _get_cached("bootstrap", BOOTSTRAP_URL)
+
+def get_fixtures_data() -> list:
+    """Fetch fixtures data from the FPL API, cached."""
+    return _get_cached("fixtures", FIXTURES_URL)
