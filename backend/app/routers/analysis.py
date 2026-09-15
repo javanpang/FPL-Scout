@@ -21,7 +21,7 @@ def fixture_difficulty(gameweeks: int = Query(5, ge=1, le=10)):
 @router.get("/player-fixtures", response_model=list[PlayerFixtureAnalysis])
 def player_fixtures(
     gameweeks: int = Query(5, ge=1, le=10),
-    position: str | None = Query(None, regex="^(GK|DEF|MID|FWD)$"),
+    position: str | None = Query(None, pattern="^(GK|DEF|MID|FWD)$"),
     limit: int = Query(20, ge=1, le=100),
 ):
     bootstrap_data = get_bootstrap_data()

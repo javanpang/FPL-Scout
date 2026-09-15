@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+
 class Fixture(BaseModel):
     id: int
     event: int | None
