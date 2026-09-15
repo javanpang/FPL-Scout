@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-POSITION_MAP = {1: "GK", 2: "DEF", 3: "MID", 4: "FWD"}
+from ..config import POSITION_MAP
 
 
 class Player(BaseModel):

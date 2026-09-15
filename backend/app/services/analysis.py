@@ -1,8 +1,7 @@
 from collections import defaultdict
 
+from ..config import POSITION_MAP
 from ..schemas.analysis import PlayerFixtureAnalysis, TeamFixtureDifficulty
-
-POSITION_MAP = {1: "GK", 2: "DEF", 3: "MID", 4: "FWD"}
 
 
 def get_next_event_id(bootstrap_data: dict) -> int:

@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from ..services.fpl_client import get_fixtures_data
 from ..schemas.fixture import Fixture, fixture_from_raw
+from ..services.fpl_client import get_fixtures_data
 
 router = APIRouter(prefix="/fixtures", tags=["fixtures"])
 

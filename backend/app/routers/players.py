@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from ..services.fpl_client import get_bootstrap_data
 from ..schemas.player import Player, player_from_raw
+from ..services.fpl_client import get_bootstrap_data
 
 router = APIRouter(prefix="/players", tags=["players"])
 

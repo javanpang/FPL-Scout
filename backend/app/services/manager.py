@@ -1,6 +1,5 @@
+from ..config import POSITION_MAP
 from ..schemas.manager import ManagerInfo, ManagerTeam, SquadPlayer
-
-POSITION_MAP = {1: "GK", 2: "DEF", 3: "MID", 4: "FWD"}
 
 
 def get_current_event_id(bootstrap_data: dict) -> int:
